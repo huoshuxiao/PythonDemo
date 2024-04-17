@@ -1,20 +1,13 @@
 import math
 import os
-import sys
 from concurrent import futures
 
-from com.sun.dushen.analysis import counts
+from com.sun.dushen.data.analysis import counts
 from com.sun.dushen.common import utils
-from com.sun.dushen.pixiu import pixiu
-
-args = sys.argv[1:]
 
 
 # 全量
 def main():
-    # 爬数据
-    if len(args) == 0 or args[0] == 'RUN':
-        pixiu.run()
 
     # 计算 随机数模型
     df = utils.read_csv('ssq')
@@ -52,7 +45,7 @@ def main():
             }
             body.append(row)
 
-    utils.write_csv('ssq', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count'], body)
+    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count'], body)
 
 
 if __name__ == '__main__':

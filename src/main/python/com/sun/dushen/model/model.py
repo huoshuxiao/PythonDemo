@@ -1,10 +1,10 @@
 import datetime
 
-from com.sun.dushen.analysis import counts as a_counts
-from com.sun.dushen.analysis import similarity
+from com.sun.dushen.data.analysis import counts as a_counts
 from com.sun.dushen.common import utils
 from com.sun.dushen.common.consts import FORMAT_DATE
-from com.sun.dushen.data import fruit
+from com.sun.dushen.model.price import decision_tree_regressor
+from com.sun.dushen.data.transform import fruit
 from com.sun.dushen.model.lottery import probability, counts
 from com.sun.dushen.model import l_model
 
@@ -14,14 +14,15 @@ def test():
 
 
 def run_analysis():
-    # step 1
-    """ 最新一期相似度 """
-    last_data = similarity.run()
-    """ 最新一期 随机次数 """
-    a_counts.ssq_count([last_data])
+    # # step 1
+    # """ 最新一期相似度 """
+    # last_data = similarity.run()
+    # """ 最新一期 随机次数 """
+    # a_counts.ssq_count([last_data])
 
-    # # step 2
-    # """ 多元回归 随机次数 """
+    # step 2
+    """ 多元回归 随机次数 """
+    a_counts.run_ssq_count()
     # run_ssq_count()
 
 
@@ -162,3 +163,8 @@ def run_ssq_count():
     no = max(df['no'].to_list()) + 1
     # 多元回归
     l_model.ssq_count(no, int(datetime.date.today().strftime(FORMAT_DATE)))
+
+
+def price():
+    decision_tree_regressor.run()
+    # decision_tree_regressor.test()

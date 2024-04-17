@@ -8,6 +8,7 @@ from datetime import datetime
 from com.sun.dushen.common import consts, utils
 
 
+# 全量分析
 def run_ssq_count():
     df = utils.read_csv('ssq')
     thread_count = os.cpu_count() + 1
@@ -62,7 +63,7 @@ def sub_ssq(start, end, df):
     return result
 
 
-# 中奖号码的随机次数
+# 指定号码的随机次数分析
 def ssq_count(bonuses):
     for bonus in bonuses:
         i = 0

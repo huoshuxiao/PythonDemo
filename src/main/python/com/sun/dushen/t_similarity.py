@@ -9,7 +9,7 @@ def main():
         # TODO
         # count = [8749216, 18080715]
         # count = [2603036]
-        count = [8514388, 18031868]
+        count = [354432, 21265920]
         with futures.ProcessPoolExecutor(len(count)) as executor:
             fs = []
             for i in range(0, len(count)):

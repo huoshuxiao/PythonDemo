@@ -9,7 +9,7 @@ from com.sun.dushen.common.consts import FORMAT_DATE
 from com.sun.dushen.model.lottery import counts
 
 
-def run(count):
+def run(random_count):
     df = utils.read_csv('ssq')
     red1 = df['red1'].to_list()
     red2 = df['red2'].to_list()
@@ -23,7 +23,7 @@ def run(count):
     date = df['date'].to_list()
 
     # TODO 出球号码
-    bonus = counts.do_ssq_bonus(count)
+    bonus = counts.do_ssq_bonus(random_count)
     lastDate = datetime.date.today().strftime(FORMAT_DATE)
 
     redData = []
@@ -56,7 +56,7 @@ def run(count):
         }
         result.append(data)
 
-    utils.write_csv('ssq_similarity{}'.format(count), ['date', 'current', 'pool', 'score', '_date'], result)
+    utils.write_csv('ssq_similarity{}'.format(random_count), ['date', 'current', 'pool', 'score', '_date'], result)
     # score 分布计算
     print(pd.DataFrame.from_records(result)['score'].value_counts())
 
