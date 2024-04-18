@@ -6,7 +6,7 @@ from com.sun.dushen.common.consts import FORMAT_DATE
 from com.sun.dushen.model.price import decision_tree_regressor
 from com.sun.dushen.data.transform import fruit
 from com.sun.dushen.model.lottery import probability, counts
-from com.sun.dushen.model import l_model
+from com.sun.dushen.model.regressor import l_model
 
 
 def test():

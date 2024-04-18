@@ -1,4 +1,4 @@
-# 多元回归
+# 线性/多元回归
 import numpy
 from sklearn import linear_model
 
