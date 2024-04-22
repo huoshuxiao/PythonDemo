@@ -3,10 +3,9 @@ import datetime
 from com.sun.dushen.data.analysis import counts as a_counts
 from com.sun.dushen.common import utils
 from com.sun.dushen.common.consts import FORMAT_DATE
-from com.sun.dushen.model.price import decision_tree_regressor
 from com.sun.dushen.data.transform import fruit
 from com.sun.dushen.model.lottery import probability, counts
-from com.sun.dushen.model.regressor import l_model
+from com.sun.dushen.model.regressor import l_model, decision_tree_regressor
 
 
 def test():
