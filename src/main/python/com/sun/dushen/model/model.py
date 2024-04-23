@@ -164,6 +164,6 @@ def run_ssq_count():
     l_model.ssq_count(no, int(datetime.date.today().strftime(FORMAT_DATE)))
 
 
-def price():
-    decision_tree_regressor.run()
-    # decision_tree_regressor.test()
+def regressor():
+    decision_tree_regressor.run_hospital()
+    # decision_tree_regressor.run_hospital()

@@ -15,5 +15,5 @@ if len(args) == 2 and int(args[1]) > 0:
 
 # TODO
 # model.run_analysis()
-model.price()
+model.regressor()
 

@@ -12,7 +12,7 @@ from com.sun.dushen.common import utils
 """
 
 
-def test():
+def test_hospital():
     # 读取数据
     df = utils.read_csv('hospital')
 
@@ -46,7 +46,7 @@ def test():
         print('{} >>, Mean Squared {}'.format(i, mse))
 
 
-def run():
+def run_hospital():
 
     # 读取数据
     df = utils.read_csv('hospital')
