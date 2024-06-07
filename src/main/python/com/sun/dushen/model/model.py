@@ -165,5 +165,7 @@ def run_ssq_count():
 
 
 def regressor():
-    decision_tree_regressor.run_hospital()
+    # decision_tree_regressor.test_hospital()
     # decision_tree_regressor.run_hospital()
+
+    decision_tree_regressor.test_nunchaku()
