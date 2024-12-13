@@ -8,7 +8,7 @@ from com.sun.dushen.common import utils
 def ssq_count(no, date):
     print("双色球", no, date)
 
-    df = utils.read_csv('count_ssq')
+    df = utils.read_csv('ssq_count')
 
     X = df[['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1']]
     for i in ['count']:

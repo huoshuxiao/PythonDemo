@@ -6,7 +6,7 @@ row_template = '水果店{}销售额为{}元，其中苹果{}份，香蕉{}份�
 
 
 def run_ssq():
-    df = utils.read_csv('count_ssq')
+    df = utils.read_csv('ssq_count')
     body = []
     for i in range(0, len(df)):
         row = df.iloc[i]
