@@ -38,10 +38,11 @@ def run_ssq_count():
                 'red6': d[7],
                 'blue1': d[8],
                 'count': d[9],
+                'count_length': len(d[9]),
             }
             body.append(row)
 
-    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count'], body)
+    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
 
 
 def sub_ssq(start, end, df):
