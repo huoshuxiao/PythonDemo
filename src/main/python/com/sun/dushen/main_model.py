@@ -14,6 +14,6 @@ if len(args) == 2 and int(args[1]) > 0:
         model.run(int(args[1]))
 
 # TODO
-# model.run_analysis()
-model.regressor()
+model.run_analysis()
+# model.regressor()
 

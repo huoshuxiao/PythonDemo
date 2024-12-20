@@ -7,6 +7,8 @@ from datetime import datetime
 
 from com.sun.dushen.common import consts, utils
 
+is_debugger = True
+
 
 # 全量分析
 def run_ssq_count():
@@ -14,19 +16,29 @@ def run_ssq_count():
     thread_count = os.cpu_count() + 1
     data_split_size = math.ceil(len(df) / thread_count)
 
+    print('thread name :: {}, time :: {}'.format(threading.current_thread().name,
+                                                 datetime.now().time().strftime(
+                                                     consts.FORMAT_TIME)))
+
     body = []
+    # 如果任务是I/O密集型的，即主要涉及网络通信、文件读写和数据库操作等，应该选择线程池，以充分利用线程的非阻塞特性，提高执行效率。
     with futures.ThreadPoolExecutor(thread_count) as executor:
         fs = []
         for i in range(0, thread_count):
-            end = data_split_size * i + data_split_size
+            start = data_split_size * i
+            end = start + data_split_size
             if end > len(df):
                 end = len(df)
+            # 越界退出
+            if end <= start:
+                return
 
-            f = executor.submit(sub_ssq, data_split_size * i, end, df)
+            f = executor.submit(sub_ssq, start, end, df)
             fs.append(f)
 
         for f in futures.as_completed(fs):
             d = f.result()[0].split(',')
+            print('get value from thread :: {}'.format(d))
             row = {
                 'no': d[0],
                 'date': d[1],
@@ -41,7 +53,7 @@ def run_ssq_count():
                 'count_length': len(d[9]),
             }
             body.append(row)
-
+    print('write csv :: {}'.format(body))
     utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
 
 
@@ -59,13 +71,13 @@ def sub_ssq(start, end, df):
         red6 = str(df.iloc[i]['red6'])
         blue1 = str(df.iloc[i]['blue1'])
         bonus = [','.join([red1, red2, red3, red4, red5, red6, blue1])]
-        count = ssq_count(bonus)
+        count = cal_ssq_count(bonus)
         result.append(','.join([no, date, red1, red2, red3, red4, red5, red6, blue1, str(count)]))
     return result
 
 
 # 指定号码的随机次数分析
-def ssq_count(bonuses):
+def cal_ssq_count(bonuses):
     for bonus in bonuses:
         i = 0
         do = True
@@ -74,6 +86,11 @@ def ssq_count(bonuses):
             r = ','.join(str(s) for s in sorted(utils.randoms(33, 6), reverse=False))
             b = ','.join(str(s) for s in sorted(utils.randoms(16, 1), reverse=False))
             t = r + ',' + b
+            if is_debugger:
+                print('thread name :: {}, time :: {}, test data :: {}, count :: {}'.format(threading.current_thread().name,
+                                                                                           datetime.now().time().strftime(
+                                                                                               consts.FORMAT_TIME),
+                                                                                           t, i))
             if bonus == t:
                 do = False
 

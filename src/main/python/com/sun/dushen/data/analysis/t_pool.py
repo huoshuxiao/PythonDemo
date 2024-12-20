@@ -1,3 +1,4 @@
+# 次数 分析
 import math
 import os
 from concurrent import futures
@@ -15,16 +16,16 @@ def main():
     data_split_size = math.ceil(len(df) / thread_count)
 
     body = []
+    # 如果任务是CPU密集型的，即主要涉及大量计算和数据处理，应该选择进程池，以充分利用多核处理器的并行计算能力。资源占用高。
     with futures.ProcessPoolExecutor(thread_count) as executor:
         fs = []
         for i in range(0, thread_count):
             end = data_split_size * i + data_split_size
             if end > len(df):
                 end = len(df)
-
             # 越界退出
             if end <= data_split_size * i:
-                return                
+                return
 
             f = executor.submit(counts.sub_ssq, data_split_size * i, end, df)
             fs.append(f)
@@ -42,10 +43,11 @@ def main():
                 'red6': d[7],
                 'blue1': d[8],
                 'count': d[9],
+                'count_length': len(d[9]),
             }
             body.append(row)
 
-    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count'], body)
+    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
 
 
 if __name__ == '__main__':
