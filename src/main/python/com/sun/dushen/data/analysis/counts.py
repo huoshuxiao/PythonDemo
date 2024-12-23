@@ -7,7 +7,7 @@ from datetime import datetime
 
 from com.sun.dushen.common import consts, utils
 
-is_debugger = True
+is_debugger = False
 
 
 # 全量分析
@@ -31,7 +31,7 @@ def run_ssq_count():
                 end = len(df)
             # 越界退出
             if end <= start:
-                return
+                break
 
             f = executor.submit(sub_ssq, start, end, df)
             fs.append(f)
@@ -53,7 +53,7 @@ def run_ssq_count():
                 'count_length': len(d[9]),
             }
             body.append(row)
-    print('write csv :: {}'.format(body))
+
     utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
 
 

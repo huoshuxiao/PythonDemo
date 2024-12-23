@@ -25,7 +25,7 @@ def main():
                 end = len(df)
             # 越界退出
             if end <= data_split_size * i:
-                return
+                break
 
             f = executor.submit(counts.sub_ssq, data_split_size * i, end, df)
             fs.append(f)
