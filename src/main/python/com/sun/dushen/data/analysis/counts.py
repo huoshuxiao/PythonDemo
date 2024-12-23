@@ -16,10 +16,6 @@ def run_ssq_count():
     thread_count = os.cpu_count() + 1
     data_split_size = math.ceil(len(df) / thread_count)
 
-    print('thread name :: {}, time :: {}'.format(threading.current_thread().name,
-                                                 datetime.now().time().strftime(
-                                                     consts.FORMAT_TIME)))
-
     body = []
     # 如果任务是I/O密集型的，即主要涉及网络通信、文件读写和数据库操作等，应该选择线程池，以充分利用线程的非阻塞特性，提高执行效率。
     with futures.ThreadPoolExecutor(thread_count) as executor:
@@ -38,7 +34,6 @@ def run_ssq_count():
 
         for f in futures.as_completed(fs):
             d = f.result()[0].split(',')
-            print('get value from thread :: {}'.format(d))
             row = {
                 'no': d[0],
                 'date': d[1],
