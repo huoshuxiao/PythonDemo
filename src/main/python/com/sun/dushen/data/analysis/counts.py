@@ -33,23 +33,24 @@ def run_ssq_count():
             fs.append(f)
 
         for f in futures.as_completed(fs):
-            d = f.result()[0].split(',')
-            row = {
-                'no': d[0],
-                'date': d[1],
-                'red1': d[2],
-                'red2': d[3],
-                'red3': d[4],
-                'red4': d[5],
-                'red5': d[6],
-                'red6': d[7],
-                'blue1': d[8],
-                'count': d[9],
-                'count_length': len(d[9]),
-            }
-            body.append(row)
+            for r in f.result():
+                d = r.split(',')
+                row = {
+                    'no': d[0],
+                    'date': d[1],
+                    'red1': d[2],
+                    'red2': d[3],
+                    'red3': d[4],
+                    'red4': d[5],
+                    'red5': d[6],
+                    'red6': d[7],
+                    'blue1': d[8],
+                    'count': d[9],
+                    'count_length': len(d[9]),
+                }
+                body.append(row)
 
-    utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
+        utils.write_csv('ssq_count', ['no', 'date', 'red1', 'red2', 'red3', 'red4', 'red5', 'red6', 'blue1', 'count', 'count_length'], body)
 
 
 def sub_ssq(start, end, df):
