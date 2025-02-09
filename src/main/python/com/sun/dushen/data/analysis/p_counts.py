@@ -3,7 +3,7 @@ import math
 import os
 from concurrent import futures
 
-from com.sun.dushen.data.analysis import counts
+from com.sun.dushen.data.analysis import t_counts
 from com.sun.dushen.common import utils
 
 
@@ -27,7 +27,7 @@ def main():
             if end <= data_split_size * i:
                 break
 
-            f = executor.submit(counts.sub_ssq, data_split_size * i, end, df)
+            f = executor.submit(t_counts.sub_ssq, data_split_size * i, end, df)
             fs.append(f)
 
         for f in futures.as_completed(fs):

@@ -1,6 +1,6 @@
 import datetime
 
-from com.sun.dushen.data.analysis import counts as a_counts
+from com.sun.dushen.data.analysis import t_counts as a_counts
 from com.sun.dushen.common import utils
 from com.sun.dushen.common.consts import FORMAT_DATE
 from com.sun.dushen.data.transform import fruit
